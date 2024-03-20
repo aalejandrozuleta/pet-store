@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 // Definimos la interfaz para representar un producto
 interface Product {
   id: number;
@@ -19,17 +18,28 @@ export class CartServicesService {
 
   constructor() { }
 
-  // Crear Método para añadir un producto al carrito
-  
+  // Método para añadir un producto al carrito
+  addToCart(product: Product): void {
+    this.cart.push(product);
+  }
 
-  // Crear Método para eliminar un producto del carrito por su ID
+  // Método para eliminar un producto del carrito por su ID
+  removeFromCart(productId: number): void {
+    this.cart = this.cart.filter(product => product.id !== productId);
+  }
 
-  // Crear Método para obtener todos los productos del carrito
-  
+  // Método para obtener todos los productos del carrito
+  getCart(): Product[] {
+    return this.cart;
+  }
 
-  // Crear Método para calcular el precio total de los productos en el carrito
+  // Método para calcular el precio total de los productos en el carrito
+  getTotalPrice(): number {
+    return this.cart.reduce((total, product) => total + product.price, 0);
+  }
 
-
-  // Crear Método para vaciar el carrito
-
+  // Método para vaciar el carrito
+  clearCart(): void {
+    this.cart = [];
+  }
 }
